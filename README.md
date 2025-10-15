@@ -1,108 +1,105 @@
+E-commerce Product Recommendation System with Gen AI
+This project delivers an advanced, end-to-end product recommendation system powered by Retrieval-Augmented Generation (RAG) and the Google Gemini API. It fundamentally shifts away from traditional collaborative filtering by focusing on semantic understanding of user needs, enabling the system to interpret complex, natural language queries and provide personalized, highly relevant product suggestions.
 
-# E-commerce Product Recommendation System with Gen AI
+🌟 Features
+RAG-Powered Semantic Search: The core engine uses RAG techniques to interpret detailed, free-form user intent ("I need a durable, lightweight drone for travel") rather than being limited to fixed categories or brands.
 
-This project is an end-to-end e-commerce product recommendation system that utilizes the power of natural language processing (NLP) , RAG Techniques,  machine learning to provide personalized product recommendations to users. The system is built using Python and leverages various libraries and frameworks such as Streamlit, Pandas, Seaborn, Matplotlib, and Langchain. Fundamental different from traditional recommendation systems, this project uses RAG techniques to generate recommendations based on user input and preference rather than collaborative filtering or content-based filtering. The system also understands user queries and provides relevant product suggestions using NLP techniques. The front-end of the system is built using Streamlit, allowing users to easily interact with the recommendation system through an intuitive user interface and options 
-are not limited to the dataset predefined categories and brands, users can input their own preferences such as product department, category, brand, and maximum price range, and the system generates personalized product recommendations based on their input understand semantic meaning of the user input and provide relevant product suggestions. 
+Dynamic Personalization: Users can input preferences like department, category, brand, and maximum price range, which are semantically processed to generate tailored recommendations.
 
-## Features
+Interactive UI: Built with Streamlit for an intuitive and user-friendly web interface.
 
-- **Data Analysis:** The system performs comprehensive data analysis on the e-commerce dataset, including visualizations of price distribution across top categories and discount percentage distribution.
-- **Product Recommendation:** Users can input their preferences, such as product department, category, brand, and maximum price range, and the system generates personalized product recommendations based on their input.
-- **NLP-powered Search:** The system utilizes NLP techniques to understand user queries and provide relevant product suggestions.
-- **Efficient Data Processing:** The dataset is preprocessed and tokenized to extract relevant information and create a vector store for efficient retrieval of product recommendations.
-- **Persistent Storage:** The processed data and vector store are saved to disk, eliminating the need for repeated data processing and reducing API call costs.
-- **Interactive UI:** The system features an intuitive and user-friendly interface built with Streamlit, allowing users to easily interact with the recommendation system.
+Efficient Data Pipeline: The system preprocesses, tokenizes, and saves the vector store to disk for persistent storage, eliminating redundant processing and reducing API call costs after the initial setup.
 
-## Installation
+Comprehensive Data Analysis: Includes initial visualizations like price distribution across top categories and discount percentage distribution.
 
-Clone the repository:
-```bash
+💻 Technical Stack
+Component	Technology	Purpose
+Generative AI	Google Gemini API	Provides high-quality embeddings and natural language generation (LLM) for explanations.
+RAG Orchestration	Langchain	Manages the retrieval (vector store) and generation (Gemini) flow.
+Frontend/UI	Streamlit	Interactive dashboard for user input and results display.
+Vector Store	FAISS	Efficient storage and retrieval of product embeddings.
+Data Science	Pandas, Seaborn, Matplotlib	Data manipulation, analysis, and visualization.
+
+Export to Sheets
+⚙️ Installation and Setup
+Follow these steps to get the project running on your local machine.
+
+1. Clone the Repository
+Bash
+
 git clone https://github.com/your-username/ecommerce-product-recommendation.git
-```
-
-Navigate to the project directory:
-```bash
 cd ecommerce-product-recommendation
-```
+2. Set Up Python Environment
+It is highly recommended to use a virtual environment (venv).
 
-Install the required dependencies:
-```bash
+Bash
+
+# Create and activate the virtual environment (Example for Linux/macOS)
+python -m venv venv
+source venv/bin/activate
+# For Windows: .\venv\Scripts\activate
+3. Install Dependencies
+The dependencies file is configured for Gemini/Google GenAI integration.
+
+Bash
+
+# This installs all required libraries, including langchain-google-genai, pandas, and streamlit
 pip install -r requirements.txt
-```
+4. Configure Gemini API Key
+You must secure your API key in an environment file.
 
-Set up the OpenAI API key:
-- Create a .env file in the project root directory.
-- Add your OpenAI API key to the .env file in the following format:
-```
-OPENAI_API_KEY=your-api-key
-```
+Create a file named .env in the project root directory.
 
-## Usage
+Add your Gemini API key to the file in the following format:
 
-- Prepare your e-commerce dataset in CSV format and place it in the project directory.
-- Update the `dataset_path` variable in the `app.py` file with the path to your dataset file.
-- Run the Streamlit app:
-```bash
+GEMINI_API_KEY=your-api-key
+▶️ Usage
+1. Prepare Data and Paths
+Place your e-commerce dataset (e.g., flipkart_com_ecommerce_sample.csv) in the project root.
+
+Ensure the dataset_path variable in your app.py file points to the correct CSV name.
+
+2. Run the Streamlit Application
+Execute the main application file from your active terminal:
+
+Bash
+
 streamlit run app.py
-```
-- Access the application through the provided URL in your web browser.
-- Explore the data analysis visualizations and interact with the product recommendation system by providing your preferences.
+3. Generate the Vector Database Index (One-Time Setup)
+The RAG index (vectorstore/index.faiss) is not included in the repository and must be generated on the first run.
 
-## Dataset
+Access the application URL provided by Streamlit.
 
-The project utilizes the Flipkart e-commerce dataset, which contains information about various products sold on the Flipkart platform. The dataset includes details such as product name, description, category, price, brand, and more. You can replace the dataset with your own e-commerce dataset in CSV format.
+Navigate to the Product Recommendation feature.
 
-## Set up the vector database file:
+Input your first query.
 
-The project uses a large vector database file (vectorstore/index.faiss) for efficient product recommendation retrieval.
-Due to the file size limitation on GitHub, the vectorstore/index.faiss file is not included in the repository.
-To obtain the vectorstore/index.faiss file just select product recommendation and the file will be generated in the project directory ( it is only generated once and can be used for future recommendations ).
+The system will begin the one-time, memory-intensive process of generating vector embeddings for all products and saving them to disk. Wait for this process to complete.
 
+Once the file is generated, all future recommendations will be fast, relying on the stored index.
 
-
-## Project Structure
-
-```
+📂 Project Structure
 ecommerce-product-recommendation/
-├── app.py
-├── data_processing.py
-├── recommendation_utils.py
-├── requirements.txt
+├── venv/
 ├── .env
+├── app.py                      # Main Streamlit application and UI
+├── data_processing.py          # Data cleaning, analysis, and embedding/vector store logic
+├── recommendation_utils.py     # Implements the LangChain RAG pipeline and Gemini calls
+├── requirements.txt            # Project dependencies
 └── README.md
-```
-- `app.py`: The main Streamlit application file that handles the user interface and integrates different components of the system.
-- `data_processing.py`: Contains functions for data preprocessing, cleaning, and analysis.
-- `recommendation_utils.py`: Implements the product recommendation system using NLP and machine learning techniques.
-- `requirements.txt`: Lists the required Python dependencies for the project.
-- `.env`: Environment file to store the OpenAI API key.
-- `README.md`: Provides an overview of the project, installation instructions, and usage guidelines.
+💡 Future Enhancements
+The following features are planned for future development to enhance accuracy and robustness:
 
-## Dependencies
+User Authentication & Profiles: Implement user profiles to track long-term behavior.
 
-The project relies on the following major dependencies:
-- **Streamlit**: For building the interactive user interface.
-- **Pandas**: For data manipulation and analysis.
-- **Seaborn and Matplotlib**: For data visualization.
-- **Langchain**: For building the language model and recommendation system.
-- **OpenAI**: For leveraging pre-trained language models and embeddings.
+Behavioral Data Integration: Expand the system to include explicit user reviews and ratings alongside semantic search.
 
-For a complete list of dependencies, please refer to the `requirements.txt` file.
+Scalability Optimization: Optimize the data processing and vector retrieval pipeline to handle large-scale, production-level datasets.
 
+Advanced AI Models: Explore state-of-the-art NLP and deep learning models for even greater accuracy.
 
-## Future Enhancements
+🤝 Contributing
+Contributions are welcome! Feel free to open an issue or submit a pull request if you have ideas, suggestions, or bug reports. Please adhere to the project's code of conduct.
 
-- Implement user authentication and personalized user profiles.
-- Expand the recommendation system to include user reviews and ratings.
-- Integrate with a real-time e-commerce platform for seamless product recommendations.
-- Optimize the system for scalability and performance to handle large-scale datasets.
-- Explore advanced NLP techniques and deep learning models for enhanced recommendation accuracy.
-
-## Contributing
-
-Contributions to the project are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request. Make sure to follow the project's code of conduct.
-
-
-## License
-
+📄 License
 This project is licensed under the MIT License.
