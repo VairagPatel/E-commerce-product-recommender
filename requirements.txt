@@ -1,0 +1,9 @@
+pandas
+seaborn
+matplotlib
+python-dotenv
+langchain
+google-genai
+langchain-google-genai
+streamlit
+faiss-cpu
